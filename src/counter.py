@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 COUNTERS = {}
 
+
 # We will use the app decorator and create a route called slash counters.
 # specify the variable in route <name>
 # let Flask know that the only methods that is allowed to called
@@ -17,7 +18,7 @@ def create_counter(name):
     app.logger.info(f"Request to create counter: {name}")
     global COUNTERS
     if name in COUNTERS:
-        return {"Message":f"Counter {name} already exists"}, status.HTTP_409_CONFLICT
+        return {"Message": f"Counter {name} already exists"}, status.HTTP_409_CONFLICT
     COUNTERS[name] = 0
     return {name: COUNTERS[name]}, status.HTTP_201_CREATED
 
@@ -28,7 +29,7 @@ def update_counter(name):
     app.logger.info(f"Request to update counter: {name}")
     global COUNTERS
     if name not in COUNTERS:
-        return {"Message":f"Counter {name} doesn't exist"}, status.HTTP_409_CONFLICT
+        return {"Message": f"Counter {name} doesn't exist"}, status.HTTP_409_CONFLICT
     COUNTERS[name] += 1
     return {name: COUNTERS[name]}, status.HTTP_200_OK
 
@@ -41,5 +42,3 @@ def read_counter(name):
     if name not in COUNTERS:
         return {"Message": f"Counter {name} doesn't exist"}, status.HTTP_409_CONFLICT
     return {"count": f"{COUNTERS[name]}"}, status.HTTP_200_OK
-
-
