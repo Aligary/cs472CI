@@ -68,3 +68,17 @@ class CounterTest(TestCase):
         get = self.client.get('/counters/ree')
         self.assertEqual(get.status_code, status.HTTP_409_CONFLICT)
 
+    def test_delete_counter(self):
+        """It should delete a counter"""
+        # Create a counter to delete
+        result = self.client.post('/counters/del')
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+
+        # Delete the counter
+        delete_result = self.client.delete('/counters/del')
+        self.assertEqual(delete_result.status_code, status.HTTP_204_NO_CONTENT)
+
+        # Verify the counter has been deleted
+        get_result = self.client.get('/counters/del')
+        self.assertEqual(get_result.status_code, status.HTTP_409_CONFLICT)
+
