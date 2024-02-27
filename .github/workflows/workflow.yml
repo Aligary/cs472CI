@@ -22,6 +22,9 @@ jobs:
       - name: Code quality analysis
         run: |
           pylint src
+      - name: Generate documentation
+        run: |
+          # Add commands to generate documentation using Sphinx
       - name: Vulnerability scanning
         run: |
           safety check
