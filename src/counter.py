@@ -7,6 +7,21 @@ app = Flask(__name__)
 
 COUNTERS = {}
 
+import logging
+
+# Initialize logger
+logger = logging.getLogger(__name__)
+
+COUNTERS = {}
+
+def increment_counter(counter_name):
+    """
+    Increment the specified counter.
+    """
+    global COUNTERS
+    COUNTERS[counter_name] = COUNTERS.get(counter_name, 0) + 1
+    logger.info(f"Counter {counter_name} incremented. Current count: {COUNTERS[counter_name]}")
+
 
 # We will use the app decorator and create a route called slash counters.
 # specify the variable in route <name>
